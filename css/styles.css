@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+body {
+  background-color: rgb(31, 30, 30);
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -14,14 +18,28 @@ img {
 
 .image-slider {
   width: 100%;
-  padding-top: 300px;
+  padding-top: 150px;
+}
+
+.swiper-slide {
+  transition: transform ease 250ms;
+}
+
+.swiper-slide:hover {
+  transform: scale(1.01);
 }
 
 .swiper-button-next,
 .swiper-button-prev {
   position: absolute;
-  top: 600px;
+  top: 350px;
   color: #fff;
+  transition: transform ease 250ms;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  transform: scale(1.1);
 }
 
 .modal {
@@ -32,8 +50,8 @@ img {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.95);
+  overflow: hidden;
+  background-color: rgba(7, 7, 7, 0.9);
 }
 
 .modal-content {
@@ -41,15 +59,15 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* background-color: #fefefe; */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  max-width: 1000px;
 }
 
 .close {
   position: absolute;
-  top: 24px;
-  right: 10px;
+  right: 100px;
   font-size: 32px;
   cursor: pointer;
   color: #fff;
@@ -58,18 +76,55 @@ img {
 }
 
 .close:hover {
-  transform: scale(1.5);
-}
-
-.modal-image-container img {
-  max-width: 100%;
-  height: auto;
+  transform: scale(1.1);
 }
 
 iframe {
-  height: 100vh;
+  height: 80vh;
+  max-width: 1000px;
 }
 
-.swiper-pagination {
-  color: #fff;
+.swiper-pagination-bullet {
+  background-color: #ffffff;
+}
+
+.swiper-pagination-bullet:hover {
+  transform: scale(1.5);
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(18, 20, 23, 0.05);
+  width: 3px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #363636;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(211, 201, 201, 0.4);
+}
+
+.gradient {
+  background-color: #2b323f;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(72, 85, 108) 0%,
+    rgb(27, 33, 43) 50%,
+    rgb(20, 25, 34) 51%,
+    rgb(53, 59, 69) 100%
+  );
+  background-image: -ms-repeating-linear-gradient(
+    top,
+    rgb(72, 85, 108) 0%,
+    rgb(27, 33, 43) 50%,
+    rgb(20, 25, 34) 51%,
+    rgb(53, 59, 69) 100%
+  );
 }

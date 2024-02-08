@@ -1,45 +1,59 @@
-const mySwiper = new Swiper(".swiper-container", {
+const swiper = new Swiper(".swiper-container", {
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
   slidesPerView: 4,
-  // spaceBetween: 20,
+  slidesPerGroup: 1,
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
   },
 });
 
-async function openModalWithVideo(videoUrl) {
-  const modalContent = document.getElementById("videoPlayer");
-  modalContent.innerHTML = videoUrl;
-  document.getElementById("modal").style.display = "block";
+const modal = document.getElementById("modal");
+const videoPlayer = document.getElementById("videoPlayer");
+const closeBtn = modal.querySelector(".close");
+const swiperSlides = document.querySelectorAll(".swiper-slide");
+const paginationBullets = document.querySelectorAll(
+  ".swiper-pagination-bullet"
+);
 
-  const videoIframe = modalContent.querySelector("iframe");
-  videoIframe.src += "&autoplay=1";
+async function openModalWithVideo(videoUrl) {
+  videoPlayer.innerHTML = videoUrl;
+  modal.style.display = "block";
+
+  const videoIframe = videoPlayer.querySelector("iframe");
+  const src = videoIframe.getAttribute("src");
+  videoIframe.setAttribute("src", src + "&autoplay=1");
+
+  closeBtn.addEventListener("click", closeModal);
 }
 
-document.querySelectorAll(".swiper-slide").forEach((slide) => {
+swiperSlides.forEach((slide, index) => {
   slide.addEventListener("click", async () => {
     const { videoUrl } = await getVideos();
     openModalWithVideo(videoUrl);
+    swiper.slideTo(index);
+  });
+});
+
+paginationBullets.forEach((bullet, index) => {
+  bullet.addEventListener("click", async () => {
+    const { videoUrl } = await getVideos();
+    openModalWithVideo(videoUrl);
+    swiper.slideTo(index);
   });
 });
 
 function closeModal() {
-  document.getElementById("modal").style.display = "none";
-  const videoIframe = document
-    .getElementById("videoPlayer")
-    .querySelector("iframe");
+  modal.style.display = "none";
+  const videoIframe = videoPlayer.querySelector("iframe");
   videoIframe.src = "";
   videoIframe.setAttribute("autoplay", "0");
 }
-document.querySelector(".close").addEventListener("click", () => {
-  closeModal();
-});
 
-window.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", function (event) {
   if (event.key === "Escape" || event.key === "Esc") {
     closeModal();
   }

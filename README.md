@@ -11,6 +11,7 @@
 - JavaScript
 - Swiper для слайдера
 - Vimeo API для отримання відео
+- Axios для запиту на Vimeo API
 
 ## Компоненти
 

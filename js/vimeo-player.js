@@ -1,12 +1,12 @@
-const token = "2fbe4923a781a99e54920460ce0260b2";
-const apiUrl = "https://api.vimeo.com";
+const TOKEN = "2fbe4923a781a99e54920460ce0260b2";
+const URL = "https://api.vimeo.com";
 const videoId = "824804225";
 
 async function getVideos() {
   try {
-    const response = await axios.get(`${apiUrl}/videos/${videoId}`, {
+    const response = await axios.get(`${URL}/videos/${videoId}`, {
       params: {
-        access_token: token,
+        access_token: TOKEN,
       },
     });
     const videoData = response.data;
